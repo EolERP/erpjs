@@ -36,12 +36,14 @@ export class SalesInvoiceResolver {
   }
 
   @Query(() => [SalesInvoice])
-  async salesInvoicesByCustomer(@Args('customerId', { type: () => Int }) customerId: number) {
+  async salesInvoicesByCustomer(
+    @Args('customerId', { type: () => Int }) customerId: number,
+  ) {
     return await this.salesInvoiceService.loadEntities(this.entityManager, {
       where: {
-        customer : {
+        customer: {
           id: customerId,
-        }
+        },
       },
       order: { id: 'DESC' },
     });
